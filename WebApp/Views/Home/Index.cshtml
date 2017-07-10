@@ -1,0 +1,53 @@
+﻿@using System.Collections.Generic
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "Home Page";
+}
+<script>
+    function sendFeedAjax() {
+        var root = 'http://localhost:50000/api/feed';
+
+        $.ajax({
+            url: root,
+            method: 'GET'
+        }).then(function(data) {
+            console.log(data);
+        });
+    }
+</script>
+<div class="row">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="col-md-3">
+            <h2>New collection</h2>
+            @Html.Partial("_NewCollectionForm")
+            <ul>
+                @foreach (var collection in (IEnumerable<UserCollection>)ViewData["collections"])
+                {
+                    <li><a asp-controller="Feed" asp-action="GetUnreadedArticlesInCollection" asp-route-collectionName="@collection.Name">@collection.Name:@collection.Id</a></li>
+                }
+            </ul>
+            <a href="http://localhost:50000/api/collections">Collections details</a><br />
+            <a asp-controller="Feed" asp-action="GetUnreadedArticlesFromAllCollections">Feed(All)</a><br />
+@*            <button onclick="sendFeedAjax()">Send api/feed ajax</button>*@
+        </div>
+        <div class="col-md-3">
+            <h2>New source</h2>
+            @Html.Partial("_NewSourceForm")
+            <ul>
+                @foreach (var source in (IEnumerable<Source>)ViewData["sources"])
+                {
+                    <li><a href="@source.UrlRss">@source.Name:@source.Id</a></li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h2>Add source to collection</h2>
+            @Html.Partial("_AddSourceToCollectionForm")
+        </div>
+        <div class="col-md-3">
+            <h2>Remove source from collection</h2>
+            @Html.Partial("_RemoveSourceFromCollectionForm")
+        </div>
+    }
+</div>

@@ -1,0 +1,10 @@
+﻿@using FormMethod = Microsoft.AspNetCore.Mvc.Rendering.FormMethod
+
+@using (Html.BeginForm("AddSourceToCollectionForLoggedUser", "Subscription", null, FormMethod.Post, false, null))
+{
+    <label>CollectionId</label>
+    <input type="number" name="collectionId" min="1">
+    <label>SourceId</label>
+    <input type="number" name="sourceId" min="1">
+    <input type="submit"/>
+}

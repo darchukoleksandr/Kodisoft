@@ -1,0 +1,9 @@
+﻿@using FormMethod = Microsoft.AspNetCore.Mvc.Rendering.FormMethod
+@model UserCollection
+
+@using (Html.BeginForm("CreateCollectionForLoggedUser", "Collection", null, FormMethod.Post, false, null))
+{
+    <label asp-for="Name"></label>
+    <input asp-for="Name">
+    <input type="submit" />
+}

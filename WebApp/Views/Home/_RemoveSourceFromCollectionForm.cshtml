@@ -1,0 +1,9 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@using (Html.BeginForm("RemoveSourceFromCollectionForLoggedUser", "Subscription", FormMethod.Post))
+{
+    <label>CollectionId</label>
+    <input name="collectionId" type="number" min="1" />
+    <label>SourceId</label>
+    <input name="sourceId" type="number" min="1" />
+    <input type="submit" />
+} 
